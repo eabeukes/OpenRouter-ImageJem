@@ -1,0 +1,59 @@
+name: Bug report
+description: Report a reproducible ImageJem defect
+title: "[bug] "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not include API keys, prompts containing private data or private images.
+  - type: input
+    id: version
+    attributes:
+      label: ImageJem version or digest
+      placeholder: sha256:... or commit SHA
+    validations:
+      required: true
+  - type: input
+    id: openwebui
+    attributes:
+      label: OpenWebUI version
+    validations:
+      required: true
+  - type: input
+    id: model
+    attributes:
+      label: OpenRouter model slug
+    validations:
+      required: true
+  - type: dropdown
+    id: operation
+    attributes:
+      label: Operation
+      options:
+        - Generation
+        - Edit
+        - Deployment or health check
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction steps
+      description: Redact credentials and private content.
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: Observed result
+      description: Include HTTP status and bridge request ID where available.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected result
+    validations:
+      required: true

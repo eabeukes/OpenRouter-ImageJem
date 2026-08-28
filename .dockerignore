@@ -1,0 +1,12 @@
+.git
+.github
+*.md
+LICENSE
+CHANGELOG.md
+CONTRIBUTING.md
+SECURITY.md
+compose*.yml
+deploy
+docs
+coverage.out
+/bridge

@@ -1,0 +1,37 @@
+services:
+  # Local-source alternative to compose.fragment.yml.
+  # Merge into the same Compose project as OpenWebUI.
+  openrouter-imagejem:
+    build:
+      context: .
+      args:
+        VERSION: "dev"
+        COMMIT: "local"
+        BUILD_DATE: "local"
+        SOURCE: "https://github.com/eabeukes/OpenRouter-ImageJem"
+    image: local/openrouter-imagejem:dev
+    container_name: openrouter-imagejem
+    network_mode: "service:open-webui"
+    depends_on:
+      open-webui:
+        condition: service_started
+        restart: true
+    restart: unless-stopped
+    read_only: true
+    user: "65532:65532"
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 64
+    mem_limit: 768m
+    cpus: "0.50"
+    environment:
+      LISTEN_ADDR: "127.0.0.1:8787"
+      OPENROUTER_IMAGES_URL: "https://openrouter.ai/api/v1/images"
+      UPSTREAM_TIMEOUT: "600s"
+      MAX_REQUEST_BYTES: "67108864"
+      MAX_RESPONSE_BYTES: "134217728"
+      MAX_SCALAR_FIELD_BYTES: "1048576"
+      MAX_REFERENCE_IMAGES: "10"
+      MAX_CONCURRENT_REQUESTS: "2"
